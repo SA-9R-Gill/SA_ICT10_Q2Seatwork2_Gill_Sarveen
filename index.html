@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills Test</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    <style>
+        /* Color theme */
+        :root {
+            --maroon-dark: #6a0000;
+            --maroon-light: #b00020;
+            --gold-accent: #ffd700;
+            --cream-bg: #fff8f3;
+        }
+
+        /* Background gradient */
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, var(--maroon-dark), var(--maroon-light));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        /* Glass-style container */
+        .container {
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        /* Header styling */
+        h1 {
+            text-align: center;
+            font-weight: 800;
+            font-size: 2rem;
+            background: linear-gradient(to right, var(--maroon-light), var(--gold-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: var(--maroon-dark);
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        /* Input styling */
+        .input-group-text {
+            background: var(--maroon-dark);
+            color: white;
+            border: none;
+            font-weight: 600;
+            min-width: 90px;
+        }
+
+        .form-control {
+            border: 1px solid var(--maroon-light);
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold-accent);
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        /* Grades layout */
+        .grades-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Button */
+        .btn-primary {
+            background: linear-gradient(90deg, var(--maroon-dark), var(--maroon-light));
+            border: none;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 12px;
+            letter-spacing: 1px;
+            margin-top: 25px;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(90deg, var(--maroon-light), var(--gold-accent));
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        /* Output display */
+        #student_info {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--maroon-dark);
+            margin-top: 25px;
+            background: #fff5f5;
+            border-left: 6px solid var(--maroon-light);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        #summary {
+            background-color: #fff;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            padding: 15px;
+            font-family: monospace;
+            margin-top: 15px;
+        }
+
+        #output {
+            text-align: center;
+            font-weight: 700;
+            color: var(--maroon-dark);
+            margin-top: 20px;
+            background: rgba(255, 215, 0, 0.25);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 5px rgba(255, 215, 0, 0.3);
+        }
+
+        /* AnimationSS */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Student Grade Calculator</h1>
+
+        <!-- Student Info -->
+        <div class="mb-3">
+            <div class="input-group mb-3">
+                <span class="input-group-text">First Name</span>
+                <input type="text" class="form-control" id="first_name" placeholder="Enter first name">
+            </div>
+            <div class="input-group">
+                <span class="input-group-text">Last Name</span>
+                <input type="text" class="form-control" id="last_name" placeholder="Enter last name">
+            </div>
+        </div>
+
+        <!-- Grade Inputs -->
+        <h2>Enter your grades:</h2>
+        <div class="grades-container">
+            <div class="input-group"><span class="input-group-text">Science</span><input type="number" id="science" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">Math</span><input type="number" id="math" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">English</span><input type="number" id="english" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">Filipino</span><input type="number" id="filipino" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">ICT</span><input type="number" id="ict" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">PE</span><input type="number" id="pe" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">SS</span><input type="number" id="ss" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">VE</span><input type="number" id="ve" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">Music</span><input type="number" id="music" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+            <div class="input-group"><span class="input-group-text">TLE</span><input type="number" id="tle" class="form-control" placeholder="Grade" min="0" max="100" step="0.01" required></div>
+        </div>
+
+        <!-- Button -->
+        <button class="btn btn-primary" type="submit" py-click="general_weighted_average">Calculate GWA</button>
+
+        <!-- Output Display -->
+        <div id="student_info"></div>
+        <pre id="summary"></pre>
+        <div id="output"></div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="py" src="main.py"></script>
+</body>
+</html>
